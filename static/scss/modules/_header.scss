@@ -1,0 +1,91 @@
+.navbar  {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+  .navbar-brand{
+    margin-right: 4vw;
+    img{
+      height: 50px;
+    }
+  }
+  .navbar-nav {
+    & > .nav-item{
+      padding-left: 10px;
+      padding-right: 10px;     
+      & > .nav-link{
+        position: relative;
+        padding-left: 5px;
+        padding-right: 5px;  
+        &:before{
+          content: '';
+          height: 4px;
+          width: 100%;
+          background: $secondary;
+          border-radius: 2px;
+          position: absolute;
+          bottom: -22px;
+          left: 0;
+          display: none;
+        }
+        &:hover,
+        &.active{
+          &:before{
+            display: block;
+          }
+        }
+      }
+    }
+
+  }
+
+  .user-account,
+  .notification{
+    margin-left: 10px;
+    .bi{
+      font-size: 30px;
+    }
+  }
+  .notification{
+    transform: scale(.8);
+    position: relative;
+    .status-mark{
+      $height: 12px;
+      height: $height;
+      width: $height;
+      border-radius: $height;
+      background: #ccc;
+      position: absolute;
+      top: 3px;
+      left: 1px;
+    }
+  }
+
+  .dropdown-menu{
+    padding: 15px 0;
+    font-size: .9rem;
+    &.mega-menu.show{
+      display: flex;
+    }
+    .menu{
+      list-style: none;
+      margin: 0;
+      padding: 0 15px;
+      border-left: 1px dashed #dddddd;
+      &:first-child{
+        border-left: 0;
+      }
+    }
+    .dropdown-item{
+      border-radius: 5px;
+      padding: 8px 15px;
+      &:hover, &:focus{
+        background: rgba($primary, .1);
+      }
+      &:active{
+        background: $primary;
+      }
+    }
+  }
+}

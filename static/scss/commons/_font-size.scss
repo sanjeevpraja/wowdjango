@@ -1,0 +1,16 @@
+$font-size-root: 14px;
+:root{
+  --bs-root-font-size : $font-size-root;
+  @include media-breakpoint-up(md){
+    --bs-root-font-size : 14px;
+  }
+  @include media-breakpoint-down(md){
+    --bs-root-font-size : 12px;
+  }
+  @include media-breakpoint-down(sm){
+    --bs-root-font-size : 11px;
+  }
+}
+
+
+

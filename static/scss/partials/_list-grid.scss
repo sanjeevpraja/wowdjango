@@ -1,0 +1,23 @@
+.list-grid{
+  display: grid;
+  grid-template-columns: 60px repeat(2, 1fr) auto;
+  gap: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+   & > div{
+   }
+  .v-center{
+    display: flex;
+    align-items: center;
+  }
+  .list-action{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    & > *{
+      flex: 0 0 30px;
+    }
+  }
+}

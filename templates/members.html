@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercise</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        .grid{
+            max-width: 1024px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;;
+        }
+    </style>
+</head>
+<body>
+<h3>hello</h3>
+    {% block content %}
+    <div class="grid">
+        <div>
+            {% if model %}
+            <table>
+            {% for item in model %}
+                <tr><td>{{item.id}}</td><td><img src="/media/{{item.image}}" style="height: 50px; width: 50px"/></td><td>{{item.name}}</td><td>{{item.duration}}</td></tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+        </div>
+    </div>       
+    {% endblock %}
+</body>
+{% block javascript %}
+
+{% endblock javascript %}
+</html>

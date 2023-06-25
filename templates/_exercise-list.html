@@ -1,0 +1,58 @@
+<div>
+    {% if model %}
+        <div class="list-grid-wrap">
+            {% for item in model %}
+                <div class="list-grid">
+                    <div class="list-img"><img src="/media/{{ item.image }}" style="height: 50px; width: 50px"/></div>
+                    <div>
+                        {{ item.id }}
+                        <div class="name">{{ item.name }}</div>
+                        <div class="detail">{{ item.description }}</div>
+                    </div>
+                    <div class="v-center">{{ item.duration }}</div>
+                    <div class="list-action">
+                         <a href="/exercise/detail/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi
+                        bi-eye"></i></a>
+                        <a href="#" data-id="{{ item.id }}" class="btn btn-primary btn-circle" onclick="event
+                        .preventDefault(); editAction
+                        (this)"><i class="bi
+                        bi-pencil"></i></a>
+                        <button class="btn btn-danger btn-circle" onclick="deleteExercise({{ item.id }})"><i class="bi
+                        bi-trash"></i></button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div id ="exercise-detail" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascript %}
+    <script>
+        function editAction(e) {
+            var pk = e.dataset.id;
+            const myModal = new bootstrap.Modal('#exercise-detail', {
+              keyboard: false
+            })
+             $('#exercise-detail .modal-body').load('/exercise/edit/'+pk)
+                myModal.show();
+        }
+    </script>
+{% endblock javascript %}

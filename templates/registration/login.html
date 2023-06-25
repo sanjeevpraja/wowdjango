@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+    <div class="login-body">
+        <div class="login-modal">
+            <div class="row d-flex align-items-center">
+                <div class="col-7">
+                    <div class="splash">
+                        <div class="logo"><img src="{% static 'img/logo.png' %}"/></div>
+                        <div class="splash-img"><img src="{% static 'img/splash-img.png' %}"/></div>
+                        <div class="text">Lorem ipsum dolor sit amet.</div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="login-box">
+                        <div class="title">Welcome | Sign In</div>
+                        {% load widget_tweaks %}
+                        <form method="post">
+                            {% csrf_token %}
+{#                            {{ form.as_p }}#}
+                            <div class="text-bg-danger">{{ form.non_field_errors }}</div>
+                            <div class="form-group">
+                                {{ form.username.errors }}
+                                {{ form.username.label }}
+                                {{ form.username|add_class:"form-control" }}
+                            </div>
+                             <div class="form-group">
+                                {{ form.password.errors }}
+                                <label for="id_password">Password</label>
+                                {{ form.password|add_class:"form-control" }}
+                            </div>
+                            <div class="form-group d-grid">
+                                <button type="submit" class="btn btn-primary">Log In</button>
+                            </div>
+                        </form>
+                        <a class="foot-link" href="/members/signup"> New to Wowfit ! Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

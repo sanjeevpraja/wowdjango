@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+        <div class="login-body">
+        <div class="login-modal">
+            <div class="row d-flex align-items-center">
+                <div class="col-7">
+                    <div class="splash">
+                        <div class="logo"><img src="{% static 'img/logo.png' %}"/></div>
+                        <div class="splash-img"><img src="{% static 'img/splash-img.png' %}"/></div>
+                        <div class="text">Lorem ipsum dolor sit amet.</div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="login-box">
+                        <div class="title">Sign Up</div>
+                        <form method="post">
+                            {% csrf_token %}
+{#                            {{ form.as_p }}#}
+                            {% load widget_tweaks %}
+                                <div class="text-bg-danger">{{ form.non_field_errors }}</div>
+                                <div class="form-group">
+
+                                    {{ form.username.label }}
+                                    {% if form.username.errors %}
+                                         {{ form.username|add_class:"form-control is-invalid" }}
+                                    {% else %}
+                                         {{form.username|add_class:"form-control"}}
+                                    {% endif %}
+                                    {{ form.username.errors }}
+                                    {{ form.username.help_text }}
+                                </div>
+                                 <div class="form-group">
+                                     <label for="id_password1">Password</label>
+                                     {{ form.password1|add_class:"form-control" }}
+                                     {{ form.password1.errors }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_password2">Confirm Password</label>
+                                    {% if form.password2.errors %}
+                                         {{ form.password2|add_class:"form-control is-invalid" }}
+                                    {% else %}
+                                         {{form.password2|add_class:"form-control"}}
+                                    {% endif %}
+                                    {{ form.password2.errors}}
+                                </div>
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </form>
+                        <a class="foot-link" href="/members/login"> Already members. Log in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+.steps{
+  $height: 40px;
+  list-style: none;
+  margin: 20px  0;
+  padding: 0;
+  display: flex;
+  .steps-segment{
+    flex:1;    
+    position: relative;
+    &:before{
+      content: '';
+      height: 3px;
+      width: 100%;
+      background: #888;
+      position: absolute;
+      top: calc($height/2);
+      left: -100%;
+      opacity: .5;
+    }
+    .text{
+      font-weight: normal;
+      font-size: .9rem;
+      line-height: 12px;
+      top: 8px;
+      position: relative;
+      display: block;
+    }
+    .steps-marker{
+      display: inline-block;      
+      height: $height;
+      width: $height;
+      text-align: center;
+      line-height: $height;
+      background: #888888;
+      border-radius: $height;
+      font-size: 16px;
+      position: relative;
+      font-weight: bold;
+      z-index: 99;
+      .icon{
+        font-size: 24px;
+        color: #ffffff;
+        &.icon-text{
+          font-size: 18px;
+          font-style: normal;
+          font-weight: normal;
+        }
+      }     
+    }
+    &.success{
+      &::before{
+        background: $success;
+      }
+      .steps-marker{
+        background: $success;
+      }
+    }
+    &:first-child{
+      &::before{
+        display: none;
+      }
+    }
+  }
+}

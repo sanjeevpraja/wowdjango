@@ -1,0 +1,42 @@
+
+<form method="post" enctype="multipart/form-data" id="exercise_form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="submit"/>
+</form>
+
+{# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>#}
+{#{% block javascript %}#}
+{#    <script>#}
+{#        $("#exercise_form").submit(function (e) {#}
+{#            e.preventDefault();#}
+{#            // serialize the data for sending the form data. not working for input type form#}
+{#            // var serializedData = $(this).serialize();#}
+{#            var formdata = new FormData(this);#}
+{#            $.ajax({#}
+{#                type: 'POST',#}
+{#                url: "{% url 'exercise:exercise_create' %}",#}
+{#                data: formdata,#}
+{#                cache: false,#}
+{#                processData: false,#}
+{#                contentType: false,#}
+{#                success: function (response) {#}
+{#                    // 1. clear the form.#}
+{#                    $("#exercise_form").trigger('reset');#}
+{#                },#}
+{#                error: function (response) {#}
+{#                    var error = response["responseJSON"];#}
+{#                    alert(response.status); // the status code#}
+{#                    console.log(response);#}
+                    {#alert(response.responseJSON.error); // the message#}
+{#                    $.each(error, function (key, value) {#}
+{#                        alert(key + "->" + value);#}
+{#                        $("#id_" + key).css({#}
+{#                            borderColor: "red",#}
+{#                        });#}
+{#                    });#}
+{#                }#}
+{#            })#}
+{#        });#}
+{#    </script>#}
+{#{% endblock javascript %}#}

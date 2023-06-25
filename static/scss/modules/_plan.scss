@@ -1,0 +1,71 @@
+.plan-wrap{
+  $border-radius: 10px;
+  $border-color: rgba(0,0,0,0.1);
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  .header{
+    padding: 10px;
+    border-radius: $border-radius $border-radius 0 0;
+    border-bottom: 1px solid $border-color;
+    background: $body-bg;
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    align-items: center;
+    .title{
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .subtitle{
+      font-size: .8rem;
+      opacity: .8;
+    }
+    .btn{
+      margin-bottom: 0;
+    }
+  }
+  .plan-lists{
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    .plan-list{
+      margin-bottom: 10px;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1fr 50px;
+      align-items: center;
+      gap : 10px;
+      &:hover{
+        background: $body-bg;
+      }
+      .title{
+        font-size: .8rem;
+      }
+      .time{
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .repeat{
+        font-size: .9rem;
+        opacity: .9;
+        .except{
+          font-style: italic;
+          opacity: .8;
+        }
+      }
+    }
+  }
+}
+
+.add-plan{
+  max-width: 500px;
+  min-height: 100%;
+  padding-left: 30px;
+  border-left: 1px dashed #dddddd;
+  .title{
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+}

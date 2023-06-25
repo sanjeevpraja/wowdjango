@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+    <div class="container">
+        {% include '_header.html' %}
+
+        <div class="main">
+            <div class="box">
+                {% if model %}
+                    <div class="layout-2">
+                        <div class="div">
+                            <h1 class="main-title">{{ model.name }}</h1>
+                            <p class="text">{{ model.description }}</p>
+                            <p>{{ model.duration }}</p>
+                            <ul class="step-desc">
+                                <li>
+                                    <div class="title">Step 1</div>
+                                    <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet
+                                        fuga nostrum quas repellendus voluptatibus.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title">Step 2</div>
+                                    <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
+                                        iusto nihil perspiciatis quidem tenetur!
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title">Step 3</div>
+                                    <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem
+                                        dolorum itaque magnam perspiciatis voluptatibus!
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="div">
+                            <div class="video-play" style="background-image: url(/media/{{ model.image }})">
+                                <div class="video-play-icon"><i class="bi bi-play-fill"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

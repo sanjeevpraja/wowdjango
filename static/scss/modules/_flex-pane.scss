@@ -1,0 +1,33 @@
+.flex-pane{
+  display: none;
+  $width: 400px;
+  $height: 100%;
+  width: $width;
+  height: $height;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0  0 10px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  right: 0;
+  &.active{
+    display: block;
+  }
+  .header{
+    position: relative;
+    margin-bottom: 30px;
+    .title{
+      font-weight: bold;
+    }
+    .close{
+      position: absolute;
+      right: 0;
+      top: -6px;
+      font-size: 20px;
+      &:hover{
+        color: $danger;
+        cursor: pointer;
+      }
+    }
+  }
+}

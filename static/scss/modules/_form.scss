@@ -1,0 +1,31 @@
+label{
+  font-size: .9rem;
+  opacity: .8;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+.form-control,
+.form-select{
+  border-radius: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  &:focus{
+    box-shadow: none;
+  }  
+}
+.form-select{
+  option{
+    min-height: 50px;
+  }
+}
+.form-switch{
+  label{
+    margin-left: 10px;
+    line-height: 30px;
+  }
+  .form-check-input{
+    height: 1.5em;
+    width: 2.5em;
+  }
+}

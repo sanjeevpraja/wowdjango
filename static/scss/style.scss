@@ -1,0 +1,74 @@
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/variables-dark";
+@import "bootstrap/maps";
+@import "bootstrap/mixins";
+@import "bootstrap/utilities";
+
+@import "commons/_variables";
+@import "commons/_color";
+@import "commons/_typography";
+@import "commons/_font-size";
+
+@import "modules/_layout";
+@import "modules/_header";
+@import "modules/_box";
+@import "modules/_button";
+@import "modules/_steps";
+@import "modules/_form";
+@import "modules/_video";
+@import "modules/_week-calendar";
+@import "modules/_plan";
+@import "modules/_flex-pane";
+
+@import "partials/_login";
+@import "partials/_list-grid";
+
+html,
+body{
+    min-height: 100%;
+    background: $body-bg;
+}
+
+
+.welcome{
+    .title{
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+}
+
+.no-content {
+    min-height: 100%;
+    max-height: calc(100vh - 300px);
+    background: #F4F7FB;
+    border: 1px solid rgba(#000000, .05);
+    border-radius: 10px;
+    display: grid;
+    place-content: center;
+    .action{
+        .text{
+            margin-top: 10px;
+            opacity: .6;
+        }
+    }
+}
+
+.main-title{
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-size: 1.8rem;
+}
+.step-desc{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li{
+        margin-bottom: 20px;
+    }
+    .title{
+        font-weight: bold;
+        font-size: .8rem;
+    }
+    .desc{}
+}

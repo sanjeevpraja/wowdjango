@@ -1,0 +1,7 @@
+{% if model %}
+   <form method="post" enctype="multipart/form-data" id="form1">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="submit"/>
+   </form>
+{% endif %}
