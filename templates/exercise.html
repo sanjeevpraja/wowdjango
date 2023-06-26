@@ -6,6 +6,9 @@
 
         <div class="main">
             <div class="layout-2">
+                <div id="exercise-list" class="box">
+                    {% include '_exercise-list.html' %}.
+                </div>
                 <div class="box">
                     {% if form == "noaccess" %}
                         <h2>{{ group }}</h2>
@@ -18,9 +21,6 @@
                         {% endfor %}
                         {% include '_exercise-create.html' %}
                     {% endif %}
-                </div>
-                <div id="exercise-list" class="box">
-                    {% include '_exercise-list.html' %}.
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 $('#id_create-steps').val(JSON.stringify(json_obj))
             }
 
-            $('#exercise_form').on('submit', function (e) {
+            $('body').on('submit','#exercise_form', function(e) {
                 e.preventDefault();
                 jsonCopy();
                 let form_data = new FormData(this);
@@ -56,18 +56,18 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        alert(response+'success');
+                        alert(response + 'success');
                         $("#exercise_form").trigger('reset');
                         alert('success');
                         appendData();
                     },
                     error: function (response) {
                         let error = response["responseJSON"];
-                        alert(response.status+ 'fail'); // the status code
+                        alert(response.status + 'fail'); // the status code
                         console.log(error);
                         {#alert(response.responseJSON.error); // the message#}
                         $.each(error, function (key, value) {
-                            alert(key +"->"+ value);
+                            alert(key + "->" + value);
                             $("#id_create-" + key).css({
                                 borderColor: "red",
                             });
@@ -76,6 +76,43 @@
                 })
             });
 
+            $('body').on('submit','#exercise_form_edit', function(e) {
+                e.preventDefault();
+                let var_id = $(this).attr('data-link');
+                alert(var_id);
+                jsonCopy();
+                let form_data = new FormData(this);
+                const formDataObj = {};
+                form_data.forEach((value, key) => (formDataObj[key] = value));
+                $.ajax({
+                    type: 'POST',
+                    url: var_id,
+                    data: form_data,
+                    dataType: "json",
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        alert(response + 'success');
+                        $("#exercise_form_edit").trigger('reset');
+                        alert('success');
+                        appendData();
+                        myModal.hide();
+                    },
+                    error: function (response) {
+                        let error = response["responseJSON"];
+                        alert(response.status + 'fail'); // the status code
+                        console.log(error);
+                        {#alert(response.responseJSON.error); // the message#}
+                        $.each(error, function (key, value) {
+                            alert(key + "->" + value);
+                            $("#id_create-" + key).css({
+                                borderColor: "red",
+                            });
+                        });
+                    }
+                })
+            });
 
             const deleteExercise = function (pk) {
                 alert("/exercise/delete/" + pk);

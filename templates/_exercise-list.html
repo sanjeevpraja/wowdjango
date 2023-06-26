@@ -11,14 +11,13 @@
                     </div>
                     <div class="v-center">{{ item.duration }}</div>
                     <div class="list-action">
-                         <a href="/exercise/detail/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi
+                        <a href="/exercise/detail/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi
                         bi-eye"></i></a>
-                        <a href="/exercise/edit/{{ item.id }}" class="btn btn-primary
-                        btn-circle"><i class="bi
+                        {#                        <a href="/exercise/edit/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi #}
+                        {#                        bi-pencil"></i></a>#}
+                        <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary
+                        btn-circle" onclick="event.preventDefault(); editAction(this)"><i class="bi
                         bi-pencil"></i></a>
-{#                         <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary#}
-{#                        btn-circle" onclick="event.preventDefault(); editAction(this)"><i class="bi#}
-{#                        bi-pencil"></i></a>#}
                         <button class="btn btn-danger btn-circle" onclick="deleteExercise({{ item.id }})"><i class="bi
                         bi-trash"></i></button>
                     </div>
@@ -28,7 +27,7 @@
     {% endif %}
 </div>
 
-<div id ="exercise-detail" class="modal" tabindex="-1">
+<div id="exercise-detail" class="modal modal-lg" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,7 +35,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
+
             </div>
         </div>
     </div>
@@ -44,15 +43,17 @@
 
 {% block javascript %}
     <script>
+        const myModal = new bootstrap.Modal('#exercise-detail', {
+            keyboard: false
+        })
+
         function editAction(e) {
             let pk = e.dataset.id;
             let name = e.dataset.name;
-            const myModal = new bootstrap.Modal('#exercise-detail', {
-              keyboard: false
-            })
-             $('#exercise-detail .modal-title').html(name);
-             $('#exercise-detail .modal-body').load('/exercise/edit/'+pk)
-                myModal.show();
+
+            $('#exercise-detail .modal-title').html(name);
+            $('#exercise-detail .modal-body').load('/exercise/edit/' + pk)
+            myModal.show();
         }
 
     </script>

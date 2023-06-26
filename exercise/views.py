@@ -110,10 +110,11 @@ def exercise_edit(request, pk):
             form = ExerciseForm(request.POST, files=request.FILES or None, instance=old_image, prefix="edit")
             if form.is_valid():
                 form.save()
-                return redirect('exercise:exercise')
-            # else:
-            #     context = {'image': old_image, 'form': form}
-            #     return render(request, '_exercise-edit.html', context)
+                instance = form.save()
+                ser_instance = serializers.serialize('json', [instance, ])
+                return JsonResponse({"instance": ser_instance}, status=200)
+            else:
+                return JsonResponse(form.errors, status=500)
 
     else:
         return redirect('exercise:sorry')

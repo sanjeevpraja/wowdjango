@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block contents %}
-    <div class="container">
-        {% include '_header.html' %}
-
-        <div class="main">
-            <div class="box">
+{#{% extends 'base.html' %}#}
+{#{% load static %}#}
+{#{% block contents %}#}
+{#    <div class="container">#}
+{#        {% include '_header.html' %}#}
+{##}
+{#        <div class="main">#}
+{#            <div class="box">#}
                 {% if model %}
-                    <form method="post" enctype="multipart/form-data" id="exercise_form">
+                    <form method="post" enctype="multipart/form-data" id="exercise_form_edit" data-link=
+                            "{% url 'exercise:exercise_edit' model.id %}">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <div id="steps-form" class="box-steps-wrap">
@@ -32,7 +33,7 @@
                         <input type="submit" class="btn btn-primary" value="submit"/>
                     </form>
                 {% endif %}
-            </div>
+{#            </div>#}
             {% block javascript %}
                 <script>
                     $(document).on('click', '.btn-add', function (e) {
@@ -60,4 +61,4 @@
                     });
                 </script>
             {% endblock javascript %}
-{% endblock %}
+{#{% endblock %}#}
