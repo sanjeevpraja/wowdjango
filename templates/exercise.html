@@ -27,7 +27,7 @@
     </div>
     {% block javascript %}
         <script>
-            $('#id_duration').on('blur', function () {
+            $('#id_create-duration').on('blur', function () {
                 $(this).removeAttr("style");
             });
 
@@ -38,7 +38,7 @@
                     json_obj['title' + i] = $(this).find('.form-control').val();
                     i++;
                 })
-                $('#id_steps').val(JSON.stringify(json_obj))
+                $('#id_create-steps').val(JSON.stringify(json_obj))
             }
 
             $('#exercise_form').on('submit', function (e) {
@@ -68,7 +68,7 @@
                         {#alert(response.responseJSON.error); // the message#}
                         $.each(error, function (key, value) {
                             alert(key +"->"+ value);
-                            $("#id_" + key).css({
+                            $("#id_create-" + key).css({
                                 borderColor: "red",
                             });
                         });

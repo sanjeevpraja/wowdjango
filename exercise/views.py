@@ -24,7 +24,7 @@ from django.http import JsonResponse
 def exercise(request):
     model = Exercise.objects.all()
     if request.user.is_authenticated:
-        form = ExerciseForm()
+        form = ExerciseForm(prefix="create")
         user_group = request.user.groups.all
     else:
         form = "no_access"
@@ -48,14 +48,14 @@ def exercise(request):
 
 def exercise_create(request):
     if request.user.is_authenticated:
-        form = ExerciseForm()
+        form = ExerciseForm(prefix="create")
     else:
         form = "no_access"
     content = {'form': form}
     if request.method == 'GET':
         return render(request, '_exercise-create.html', content)
     elif request.method == "POST":
-        form_data = ExerciseForm(request.POST, request.FILES)
+        form_data = ExerciseForm(request.POST, request.FILES, prefix="create")
         if form_data.is_valid():
             #form_data.save()
             instance = form_data.save()
@@ -93,7 +93,7 @@ def exercise_edit(request, pk):
         user_group = request.user.groups.all
         if request.method == 'GET':
             exercise_obj = Exercise.objects.get(pk=pk)
-            form = ExerciseForm(instance=exercise_obj)
+            form = ExerciseForm(instance=exercise_obj, prefix="edit")
             content = {'form': form, "model": exercise_obj, "group": user_group}
             return render(request, '_exercise-edit.html', content)
         elif request.method == "POST":
@@ -104,7 +104,7 @@ def exercise_edit(request, pk):
             #     duration=parse_duration(request.POST['duration'])
             # )
             old_image = Exercise.objects.get(pk=pk)
-            form = ExerciseForm(request.POST, files=request.FILES or None, instance=old_image)
+            form = ExerciseForm(request.POST, files=request.FILES or None, instance=old_image, prefix="edit")
             if form.is_valid():
                 form.save()
                 return redirect('exercise:exercise')
