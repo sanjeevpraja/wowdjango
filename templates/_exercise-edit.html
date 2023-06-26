@@ -2,22 +2,21 @@
    <form method="post" enctype="multipart/form-data" id="exercise_form">
         {% csrf_token %}
         {{form.as_p}}
-       <hr>
-        {% for key, values in steps.items %}
-            {{ values }}
-    {% endfor %}
-       <hr>
-           <div id="steps-form" class="box-steps-wrap">
+       <div id="steps-form" class="box-steps-wrap">
             <div class="box-steps">
-                <div class="box-step">
+                {% for key, values in steps.items %}
+
+                    <div class="box-step">
                     <div class="form-group">
                         <label for="">Title</label>
-                        <input class="form-control" type="text" name="" value="">
+                        <input class="form-control" type="text" name="" value="{{ values }}">
                     </div>
                     <div class="step-action">
                         <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
                     </div>
                 </div>
+                {% endfor %}
+
             </div>
             <button class="btn-add"><i class="bi bi-plus"></i></button>
         </div>
