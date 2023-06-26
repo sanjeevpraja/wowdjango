@@ -2,6 +2,11 @@
    <form method="post" enctype="multipart/form-data" id="exercise_form">
         {% csrf_token %}
         {{form.as_p}}
+       <hr>
+        {% for key, values in steps.items %}
+            {{ values }}
+    {% endfor %}
+       <hr>
            <div id="steps-form" class="box-steps-wrap">
             <div class="box-steps">
                 <div class="box-step">
@@ -16,22 +21,13 @@
             </div>
             <button class="btn-add"><i class="bi bi-plus"></i></button>
         </div>
+       <hr>
         <input type="submit" class="btn btn-primary" value="submit"/>
    </form>
 {% endif %}
 
 {% block javascript %}
     <script>
-        $(document).on('click','.btn-add', function(e){
-            e.preventDefault();
-            let parent = $(this).siblings('.box-steps');
-            let step = parent.find('.box-step').first();
-            parent.append(step.first().clone());
-        });
-        $(document).on('click','.btn-delete', function(e){
-            e.preventDefault();
-            $(this).closest('.box-step').remove();
-        });
  {% comment %}       $(document).on('click', '#test', function(){
             let json_obj = {};
             let i = 1;

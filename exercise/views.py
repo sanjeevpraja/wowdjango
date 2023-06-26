@@ -7,6 +7,7 @@ from .models import *
 from .forms import ExerciseForm
 from django.core import serializers
 from django.http import JsonResponse
+import json
 
 
 # Create your views here.
@@ -93,8 +94,10 @@ def exercise_edit(request, pk):
         user_group = request.user.groups.all
         if request.method == 'GET':
             exercise_obj = Exercise.objects.get(pk=pk)
+            steps = exercise_obj.steps
+            print(type(steps))
             form = ExerciseForm(instance=exercise_obj, prefix="edit")
-            content = {'form': form, "model": exercise_obj, "group": user_group}
+            content = {'form': form, "model": exercise_obj, "group": user_group, "steps": steps}
             return render(request, '_exercise-edit.html', content)
         elif request.method == "POST":
             # working

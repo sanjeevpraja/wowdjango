@@ -21,5 +21,5 @@ class ExerciseForm(BaseForm):
         fields = [
             'name', 'description', 'duration', 'steps', 'image',
         ]
-        widgets = {'steps': forms.HiddenInput()}
+        # widgets = {'steps': forms.HiddenInput()}
 

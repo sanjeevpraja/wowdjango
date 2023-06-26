@@ -18,16 +18,18 @@
     <hr>
     <input class="btn btn-primary" type="submit" value="submit"/>
 </form>
-{% comment %}
+
 {% block javascript %}
     <script>
-        $(document).on('click','.btn-add', function(e){
+        $(document).on('click', '.btn-add', function (e) {
             e.preventDefault();
-            $('.box-steps').append($('.box-step').first().clone());
+            let parent = $(this).siblings('.box-steps');
+            let step = parent.find('.box-step').first();
+            parent.append(step.first().clone());
         });
-        $(document).on('click','.btn-delete', function(e){
+        $(document).on('click', '.btn-delete', function (e) {
             e.preventDefault();
             $(this).closest('.box-step').remove();
         });
     </script>
-{% endblock javascript %}{% endcomment %}
+{% endblock javascript %}
