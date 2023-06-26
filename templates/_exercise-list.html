@@ -13,12 +13,12 @@
                     <div class="list-action">
                          <a href="/exercise/detail/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi
                         bi-eye"></i></a>
-                        <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary
-                        btn-circle"
-                           onclick="event
-                        .preventDefault(); editAction
-                        (this)"><i class="bi
+                        <a href="/exercise/edit/{{ item.id }}" class="btn btn-primary
+                        btn-circle"><i class="bi
                         bi-pencil"></i></a>
+{#                         <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary#}
+{#                        btn-circle" onclick="event.preventDefault(); editAction(this)"><i class="bi#}
+{#                        bi-pencil"></i></a>#}
                         <button class="btn btn-danger btn-circle" onclick="deleteExercise({{ item.id }})"><i class="bi
                         bi-trash"></i></button>
                     </div>
@@ -54,5 +54,6 @@
              $('#exercise-detail .modal-body').load('/exercise/edit/'+pk)
                 myModal.show();
         }
+
     </script>
 {% endblock javascript %}

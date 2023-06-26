@@ -1,40 +1,63 @@
-{% if model %}
-   <form method="post" enctype="multipart/form-data" id="exercise_form">
-        {% csrf_token %}
-        {{form.as_p}}
-       <div id="steps-form" class="box-steps-wrap">
-            <div class="box-steps">
-                {% for key, values in steps.items %}
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+    <div class="container">
+        {% include '_header.html' %}
 
-                    <div class="box-step">
-                    <div class="form-group">
-                        <label for="">Title</label>
-                        <input class="form-control" type="text" name="" value="{{ values }}">
-                    </div>
-                    <div class="step-action">
-                        <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
-                    </div>
-                </div>
-                {% endfor %}
+        <div class="main">
+            <div class="box">
+                {% if model %}
+                    <form method="post" enctype="multipart/form-data" id="exercise_form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div id="steps-form" class="box-steps-wrap">
+                            <div class="box-steps">
+                                {% for key, values in steps.items %}
 
+                                    <div class="box-step">
+                                        <div class="form-group">
+                                            <label for="">Title</label>
+                                            <input class="form-control" type="text" name="" value="{{ values }}">
+                                        </div>
+                                        <div class="step-action">
+                                            <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <button class="btn-add"><i class="bi bi-plus"></i></button>
+                        </div>
+                        <hr>
+                        <input type="submit" class="btn btn-primary" value="submit"/>
+                    </form>
+                {% endif %}
             </div>
-            <button class="btn-add"><i class="bi bi-plus"></i></button>
-        </div>
-       <hr>
-        <input type="submit" class="btn btn-primary" value="submit"/>
-   </form>
-{% endif %}
+            {% block javascript %}
+                <script>
+                    $(document).on('click', '.btn-add', function (e) {
+                        e.preventDefault();
+                        let parent = $(this).siblings('.box-steps');
+                        let step = parent.find('.box-step').first();
+                        parent.append(step.first().clone());
+                    });
+                    $(document).on('click', '.btn-delete', function (e) {
+                        e.preventDefault();
+                        $(this).closest('.box-step').remove();
+                    });
 
-{% block javascript %}
-    <script>
- {% comment %}       $(document).on('click', '#test', function(){
-            let json_obj = {};
-            let i = 1;
-            $('.box-step').each(function(){
-                json_obj['title'+i] = $(this).find('.form-control').val();
-                i++;
-            })
-            $('#id_steps').val(JSON.stringify(json_obj))
-        });{% endcomment %}
-    </script>
-{% endblock javascript %}
+                    function jsonCopy_edit() {
+                        let json_obj = {};
+                        let i = 1;
+                        $('.box-step').each(function () {
+                            json_obj['title' + i] = $(this).find('.form-control').val();
+                            i++;
+                        })
+                        $('#id_edit-steps').val(JSON.stringify(json_obj));
+                    }
+                    $(document).ready(function(){
+                        jsonCopy_edit();
+                    });
+                </script>
+            {% endblock javascript %}
+{% endblock %}
