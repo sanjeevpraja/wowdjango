@@ -13,7 +13,9 @@
                     <div class="list-action">
                          <a href="/exercise/detail/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi
                         bi-eye"></i></a>
-                        <a href="#" data-id="{{ item.id }}" class="btn btn-primary btn-circle" onclick="event
+                        <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary
+                        btn-circle"
+                           onclick="event
                         .preventDefault(); editAction
                         (this)"><i class="bi
                         bi-pencil"></i></a>
@@ -30,15 +32,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Edit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -47,10 +45,12 @@
 {% block javascript %}
     <script>
         function editAction(e) {
-            var pk = e.dataset.id;
+            let pk = e.dataset.id;
+            let name = e.dataset.name;
             const myModal = new bootstrap.Modal('#exercise-detail', {
               keyboard: false
             })
+             $('#exercise-detail .modal-title').html(name);
              $('#exercise-detail .modal-body').load('/exercise/edit/'+pk)
                 myModal.show();
         }

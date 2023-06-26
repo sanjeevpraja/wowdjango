@@ -13,24 +13,12 @@
                             <p class="text">{{ model.description }}</p>
                             <p>{{ model.duration }}</p>
                             <ul class="step-desc">
-                                <li>
-                                    <div class="title">Step 1</div>
-                                    <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet
-                                        fuga nostrum quas repellendus voluptatibus.
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">Step 2</div>
-                                    <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-                                        iusto nihil perspiciatis quidem tenetur!
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">Step 3</div>
-                                    <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem
-                                        dolorum itaque magnam perspiciatis voluptatibus!
-                                    </div>
-                                </li>
+                                {% for k, v in model.steps.items %}
+                                    <li>
+                                        <div class="title">{{ k }}</div>
+                                        <div class="desc">{{ v }}</div>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="div">

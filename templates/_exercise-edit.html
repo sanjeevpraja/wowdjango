@@ -1,7 +1,43 @@
 {% if model %}
-   <form method="post" enctype="multipart/form-data" id="form1">
+   <form method="post" enctype="multipart/form-data" id="exercise_form">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="submit"/>
+           <div id="steps-form" class="box-steps-wrap">
+            <div class="box-steps">
+                <div class="box-step">
+                    <div class="form-group">
+                        <label for="">Title</label>
+                        <input class="form-control" type="text" name="" value="">
+                    </div>
+                    <div class="step-action">
+                        <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-add"><i class="bi bi-plus"></i></button>
+        </div>
+        <input type="submit" class="btn btn-primary" value="submit"/>
    </form>
 {% endif %}
+
+{% block javascript %}
+    <script>
+        $(document).on('click','.btn-add', function(e){
+            e.preventDefault();
+            $('.box-steps').append($('.box-step').first().clone());
+        });
+        $(document).on('click','.btn-delete', function(e){
+            e.preventDefault();
+            $(this).closest('.box-step').remove();
+        });
+ {% comment %}       $(document).on('click', '#test', function(){
+            let json_obj = {};
+            let i = 1;
+            $('.box-step').each(function(){
+                json_obj['title'+i] = $(this).find('.form-control').val();
+                i++;
+            })
+            $('#id_steps').val(JSON.stringify(json_obj))
+        });{% endcomment %}
+    </script>
+{% endblock javascript %}

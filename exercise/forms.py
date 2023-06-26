@@ -17,9 +17,9 @@ class ExerciseForm(BaseForm):
 
     class Meta:
         model = Exercise
-        fields = '__all__'
-        # fields = [
-        #     'name', 'description', 'duration', 'image',
-        # ]
-        # widgets = {'steps': forms.HiddenInput()}
+        # fields = '__all__'
+        fields = [
+            'name', 'description', 'duration', 'steps', 'image',
+        ]
+        widgets = {'steps': forms.HiddenInput()}
 

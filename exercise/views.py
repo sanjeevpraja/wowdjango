@@ -41,7 +41,7 @@ def exercise(request):
     #         #instance = form_data.save()
     #         # ser_instance = serializers.serialize('json', [instance, ])
     #         # return JsonResponse({"instance": ser_instance}, status=200)
-    #         return render(request, '_exercise-create.html', content)
+    #         return render(request, 'exercise.html', content)
     #     else:
     #         return JsonResponse(form_data.errors, status=500)
 
@@ -57,11 +57,10 @@ def exercise_create(request):
     elif request.method == "POST":
         form_data = ExerciseForm(request.POST, request.FILES)
         if form_data.is_valid():
-            form_data.save()
-            # instance = form_data.save()
-            # ser_instance = serializers.serialize('json', [instance, ])
-            # return JsonResponse({"instance": ser_instance}, status=200)
-            return render(request, '_exercise-create.html', content)
+            #form_data.save()
+            instance = form_data.save()
+            ser_instance = serializers.serialize('json', [instance, ])
+            return JsonResponse({"instance": ser_instance}, status=200)
         else:
             return JsonResponse(form_data.errors, status=500)
 

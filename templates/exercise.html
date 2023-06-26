@@ -6,17 +6,17 @@
 
         <div class="main">
             <div class="layout-2">
-                <div  class="box">
+                <div class="box">
                     {% if form == "noaccess" %}
-                        <h2>{{group}}</h2>
+                        <h2>{{ group }}</h2>
                         <div>exercise.html
                             <a href="/accounts/login/">please login</a>
                         </div>
                     {% else %}
                         {% for obj in group %}
-                            {{obj}}
+                            {{ obj }}
                         {% endfor %}
-                        {% include '_exercise-create.html' %}.
+                        {% include '_exercise-create.html' %}
                     {% endif %}
                 </div>
                 <div id="exercise-list" class="box">
@@ -26,64 +26,79 @@
         </div>
     </div>
     {% block javascript %}
-<script>
-    $('#exercise_form').on('submit' , function (e) {
-        e.preventDefault();
-        let form_data = new FormData(this);
-        const formDataObj = {};
-        form_data.forEach((value, key) => (formDataObj[key] = value));
-        $.ajax({
-            type: 'POST',
-            url: "{% url 'exercise:exercise_create' %}",
-            data: form_data,
-            dataType: "json",
-            cache: false,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                $("#exercise_form").trigger('reset');
-                alert('success');
-                appendData();
-            },
-            error: function (response) {
-                let error = response["responseJSON"];
-                //alert(response.status); // the status code
-                //console.log(response);
-                {#alert(response.responseJSON.error); // the message#}
-                $.each(error, function (key, value) {
-                    //alert(key +"->"+ value);
-                    $("#id_"+key).css({
-                        borderColor : "red",
-                    });
-                });
+        <script>
+            $('#id_duration').on('blur', function () {
+                $(this).removeAttr("style");
+            });
+
+            function jsonCopy() {
+                let json_obj = {};
+                let i = 1;
+                $('.box-step').each(function () {
+                    json_obj['title' + i] = $(this).find('.form-control').val();
+                    i++;
+                })
+                $('#id_steps').val(JSON.stringify(json_obj))
             }
-        })
-    });
+
+            $('#exercise_form').on('submit', function (e) {
+                e.preventDefault();
+                jsonCopy();
+                let form_data = new FormData(this);
+                const formDataObj = {};
+                form_data.forEach((value, key) => (formDataObj[key] = value));
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'exercise:exercise_create' %}",
+                    data: form_data,
+                    dataType: "json",
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        alert(response+'success');
+                        $("#exercise_form").trigger('reset');
+                        alert('success');
+                        appendData();
+                    },
+                    error: function (response) {
+                        let error = response["responseJSON"];
+                        alert(response.status+ 'fail'); // the status code
+                        console.log(error);
+                        {#alert(response.responseJSON.error); // the message#}
+                        $.each(error, function (key, value) {
+                            alert(key +"->"+ value);
+                            $("#id_" + key).css({
+                                borderColor: "red",
+                            });
+                        });
+                    }
+                })
+            });
 
 
-
-    const deleteExercise = function(pk){
-      alert("/exercise/delete/"+pk);
-       $.ajax({
-            type: 'GET',
-            url: "/exercise/delete/"+pk,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                alert('success')
-                appendData()
-            },
-            error: function (response) {
-                alert('fail');
+            const deleteExercise = function (pk) {
+                alert("/exercise/delete/" + pk);
+                $.ajax({
+                    type: 'GET',
+                    url: "/exercise/delete/" + pk,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        alert('success')
+                        appendData()
+                    },
+                    error: function (response) {
+                        alert('fail');
+                    }
+                })
             }
-        })
-    }
 
-    function appendData() {
-        //console.log(exercise)
-        $('#exercise-list').load('/exercise/list/');
-    }
-</script>
-{% endblock javascript %}
+            function appendData() {
+                //console.log(exercise)
+                $('#exercise-list').load('/exercise/list/');
+            }
+        </script>
+    {% endblock javascript %}
 {% endblock %}
 

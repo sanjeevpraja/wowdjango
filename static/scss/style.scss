@@ -20,6 +20,7 @@
 @import "modules/_week-calendar";
 @import "modules/_plan";
 @import "modules/_flex-pane";
+@import "modules/_box-steps";
 
 @import "partials/_login";
 @import "partials/_list-grid";
@@ -29,7 +30,6 @@ body{
     min-height: 100%;
     background: $body-bg;
 }
-
 
 .welcome{
     .title{

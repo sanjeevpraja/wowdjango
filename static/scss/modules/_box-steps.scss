@@ -1,0 +1,68 @@
+.box-steps-wrap{
+    $width: 40px;
+    .btn-add{
+      background: $success;
+      border: 1px solid rgba(0,0,0,0.1);
+      color: #ffffff;
+      height: $width;
+      line-height: $width;
+      width: $width;
+      border-radius: $width;
+      text-align: center;
+      font-size: 30px;
+      display: grid;
+      place-content: center;
+      &:hover, &:focus{
+        background:  darken($success, 8%);
+        color: #ffffff;
+        cursor: pointer;
+      }
+  }
+}
+.box-steps{
+  $width: 40px;
+  padding: 0 50px 0 0;
+  @include media-breakpoint-down(lg){
+    padding: 0 50px 0 0;
+  }
+
+  .box-step{
+    padding: 15px;
+    background: $body-bg;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    .form-control{
+      background: #ffffff;
+    }
+    .form-group{
+      margin-bottom: 5px;
+    }
+    textarea{
+      height: 160px;
+    }
+    .step-action{
+      position: absolute;
+      right: -(calc($width + 10px));
+      top: 0;
+      width: $width;
+      .btn-delete{
+        background: $gray-300;
+        border: 1px solid $gray-400;
+        color: $gray-700;
+        width: $width;
+        height: $width;
+        line-height: $width;
+        border-radius: $width;
+        text-align: center;
+        &:hover, &:focus{
+          background: $danger;
+          color: #ffffff;
+          cursor: pointer;
+        }
+      }
+
+    }
+  }
+}
