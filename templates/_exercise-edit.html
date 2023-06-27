@@ -17,8 +17,10 @@
 
                                     <div class="box-step">
                                         <div class="form-group">
-                                            <label for="">Title</label>
-                                            <input class="form-control" type="text" name="" value="{{ values }}">
+                                            <label for="">Step</label>
+                                            <input class="form-control form-title" type="text" name="" value="{{ key }}">
+                                            <input class="form-control form-value" type="text" name="" value="
+{{ values }}">
                                         </div>
                                         <div class="step-action">
                                             <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
@@ -40,7 +42,7 @@
                         let json_obj = {};
                         let i = 1;
                         $('.box-step').each(function () {
-                            json_obj['title' + i] = $(this).find('.form-control').val();
+                            json_obj[$(this).find('.form-title').val()] = $(this).find('.form-value').val();
                             i++;
                         })
                         $('#id_edit-steps').val(JSON.stringify(json_obj));

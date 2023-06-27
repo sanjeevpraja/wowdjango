@@ -33,3 +33,12 @@ label{
 textarea{
   height: 100px;
 }
+
+
+.modal-content{
+  --bs-modal-bg: #ffffff;
+}
+.modal-body{
+  max-height: 70vh;
+  overflow-y: auto;
+}
