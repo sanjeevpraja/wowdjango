@@ -2,18 +2,14 @@ from django import forms
 from .models import *
 
 
-class BaseForm(forms.ModelForm):
+class ExerciseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
-
-
-class ExerciseForm(BaseForm):
-    # name = forms.CharField(required=False)
-    # description = forms.CharField(required=False, widget=forms.Textarea)
-    # duration = forms.DurationField(required=False)
-    image = forms.ImageField(required=False)
+        # self.fields['name'].widget.attrs['class'] = 'form-control'
+        self.fields['image'].required = False
+        self.fields['steps'].required = False
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         model = Exercise

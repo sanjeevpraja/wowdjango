@@ -19,7 +19,7 @@
                         {% for obj in group %}
                             {{ obj }}
                         {% endfor %}
-                        {% include '_exercise-create.html' %}
+                        <div id="create-view"></div>
                     {% endif %}
                 </div>
             </div>
@@ -27,6 +27,9 @@
     </div>
     {% block javascript %}
         <script>
+            $(document).ready(function () {
+                 $('#create-view').load('/exercise/create/');
+            });
             $('#id_create-duration').on('blur', function () {
                 $(this).removeAttr("style");
             });
@@ -41,12 +44,13 @@
                 $('#id_create-steps').val(JSON.stringify(json_obj))
             }
 
-            $('body').on('submit','#exercise_form', function(e) {
+            $('body').on('submit', '#exercise_form', function (e) {
                 e.preventDefault();
                 jsonCopy();
                 let form_data = new FormData(this);
                 const formDataObj = {};
                 form_data.forEach((value, key) => (formDataObj[key] = value));
+                console.log(form_data);
                 $.ajax({
                     type: 'POST',
                     url: "{% url 'exercise:exercise_create' %}",
@@ -63,7 +67,7 @@
                     },
                     error: function (response) {
                         let error = response["responseJSON"];
-                        alert(response.status + 'fail'); // the status code
+                        alert(response.status + ' fail'); // the status code
                         console.log(error);
                         {#alert(response.responseJSON.error); // the message#}
                         $.each(error, function (key, value) {
@@ -76,7 +80,7 @@
                 })
             });
 
-            $('body').on('submit','#exercise_form_edit', function(e) {
+            $('body').on('submit', '#exercise_form_edit', function (e) {
                 e.preventDefault();
                 let var_id = $(this).attr('data-link');
                 alert(var_id);
