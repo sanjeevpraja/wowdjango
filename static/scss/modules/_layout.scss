@@ -1,10 +1,9 @@
 .layout-2{
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 500px);
+  grid-template-columns: minmax(500px, 1fr) minmax(200px, 500px);
   grid-auto-rows: 1fr;
   gap: 30px
 }
-
 .main{
   padding: 20px 0;
 }

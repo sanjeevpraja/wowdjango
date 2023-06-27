@@ -49,10 +49,14 @@ class ExerciseListView(ListView):
 class ExerciseCreateView(CreateView):
     model = Exercise
     form_class = ExerciseForm
+    form_prefix = 'create'
     template_name = '_exercise-create.html'
 
-    def form_valid(self, form):
-        instance = form.save()
+    def get_form_kwargs(self):
+        kwargs = super(CreateView, self).get_form_kwargs()
+        if self.form_prefix:
+            kwargs.update({'prefix': self.form_prefix})
+        return kwargs
 
     def post(self, request, *args, **kwargs):
         form_data = ExerciseForm(self.request.POST, self.request.FILES, prefix="create")

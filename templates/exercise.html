@@ -44,7 +44,7 @@
                 $('#id_create-steps').val(JSON.stringify(json_obj))
             }
 
-            $('body').on('submit', '#exercise_form', function (e) {
+            $('body').on('submit', '#exercise_form_create', function (e) {
                 e.preventDefault();
                 jsonCopy();
                 let form_data = new FormData(this);
@@ -61,7 +61,7 @@
                     contentType: false,
                     success: function (response) {
                         alert(response + 'success');
-                        $("#exercise_form").trigger('reset');
+                        $("#exercise_form_create").trigger('reset');
                         alert('success');
                         appendData();
                     },
@@ -110,7 +110,7 @@
                         {#alert(response.responseJSON.error); // the message#}
                         $.each(error, function (key, value) {
                             alert(key + "->" + value);
-                            $("#id_create-" + key).css({
+                            $("#id_edit-" + key).css({
                                 borderColor: "red",
                             });
                         });

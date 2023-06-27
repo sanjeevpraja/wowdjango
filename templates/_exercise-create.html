@@ -1,5 +1,5 @@
 <h4>Create New Exercise</h4>
-<form method="post" enctype="multipart/form-data" id="exercise_form">
+<form method="post" enctype="multipart/form-data" id="exercise_form_create">
     {% csrf_token %}
     {{ form.as_p }}
     <div id="steps-form" class="box-steps-wrap">
