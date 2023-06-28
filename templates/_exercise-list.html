@@ -1,4 +1,5 @@
 <div>
+    <div class="box-title">Create New Exercise</div>
     {% if model %}
         <div class="list-grid-wrap">
             {% for item in model %}
@@ -18,12 +19,36 @@
                         <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary
                         btn-circle" onclick="event.preventDefault(); editAction(this)"><i class="bi
                         bi-pencil"></i></a>
-                        <button class="btn btn-danger btn-circle" onclick="deleteExercise({{ item.id }})"><i class="bi
+                        {#                        <a class="btn btn-danger btn-circle" href="/exercise/delete/{{ item.id }}/"><i#}
+                        {#                                class="bi#}
+                        {#                        bi-trash"></i></a>#}
+                        <button class="btn btn-danger btn-circle btn-delete" data-id="{{ item.id }}"><i class="bi
                         bi-trash"></i></button>
                     </div>
                 </div>
             {% endfor %}
         </div>
+    {% endif %}
+    {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
     {% endif %}
 </div>
 
@@ -54,6 +79,16 @@
             $('#exercise-detail .modal-title').html(name);
             $('#exercise-detail .modal-body').load('/exercise/edit/' + pk)
             myModal.show();
+        }
+
+        $('body').on('click', '.btn-delete', function (e) {
+            e.preventDefault();
+            let pk = $(this).attr('data-id');
+            $('.list-grid-wrap').load("/exercise/delete/" + pk);
+        });
+
+        function appendData() {
+            $('#exercise-list').load('/exercise/list/');
         }
 
     </script>

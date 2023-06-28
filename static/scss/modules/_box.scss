@@ -6,4 +6,9 @@
   margin-top: 15px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  .box-title{
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+  }
 }

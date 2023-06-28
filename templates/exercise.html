@@ -117,28 +117,6 @@
                     }
                 })
             });
-
-            const deleteExercise = function (pk) {
-                alert("/exercise/delete/" + pk);
-                $.ajax({
-                    type: 'GET',
-                    url: "/exercise/delete/" + pk,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        alert('success')
-                        appendData()
-                    },
-                    error: function (response) {
-                        alert('fail');
-                    }
-                })
-            }
-
-            function appendData() {
-                //console.log(exercise)
-                $('#exercise-list').load('/exercise/list/');
-            }
         </script>
     {% endblock javascript %}
 {% endblock %}

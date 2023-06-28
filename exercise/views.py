@@ -5,7 +5,7 @@ from .models import *
 from .forms import ExerciseForm
 from django.core import serializers
 from django.http import JsonResponse
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView
 import json
 
 
@@ -13,6 +13,7 @@ class ExerciseView(ListView):
     model = Exercise
     context_object_name = 'model'
     template_name = 'exercise.html'
+    paginate_by = 5
 
 
 # def exercise(request):
@@ -89,15 +90,20 @@ class ExerciseCreateView(CreateView):
 #         else:
 #             return JsonResponse(form_data.errors, status=500)
 
+class ExerciseDeleteView(DeleteView):
+    model = Exercise
+    context_object_name = 'model'
+    template_name = '_exercise-confirm-delete.html'
+    success_url = "/exercise"
 
-def exercise_delete(request, pk):
-    if request.method == "GET":
-        exercise_obj = Exercise.objects.get(pk=pk)
-        exercise_obj.delete()
-        data = {
-            'deleted': True
-        }
-        return JsonResponse(data)
+# def exercise_delete(request, pk):
+#     if request.method == "GET":
+#         exercise_obj = Exercise.objects.get(pk=pk)
+#         exercise_obj.delete()
+#         data = {
+#             'deleted': True
+#         }
+#         return JsonResponse(data)
 
 
 def exercise_edit(request, pk):
