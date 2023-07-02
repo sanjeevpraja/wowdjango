@@ -7,7 +7,8 @@
 {#        <div class="main">#}
 {#            <div class="box">#}
                 {% if model %}
-                    <form method="post" enctype="multipart/form-data" id="exercise_form_edit" data-link=
+                    <form method="post" enctype="multipart/form-data" id="exercise_form_edit" class="edit-{{ model.id }}"
+                          data-link=
                             "{% url 'exercise:exercise_edit' model.id %}">
                         {% csrf_token %}
                         {{ form.as_p }}
@@ -15,41 +16,39 @@
                             <div class="box-steps">
                                 {% for key, values in steps.items %}
 
-                                    <div class="box-step">
+                                    <div class="box-step step-edit">
                                         <div class="form-group">
                                             <label for="">Step</label>
                                             <input class="form-control form-title" type="text" name="" value="{{ key }}">
-                                            <input class="form-control form-value" type="text" name="" value="
-{{ values }}">
+                                            <input class="form-control form-value" type="text" name="" value="{{ values }}">
                                         </div>
                                         <div class="step-action">
-                                            <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
+                                            <button class="btn-step-delete"><i class="bi bi-trash-fill"></i></button>
                                         </div>
                                     </div>
                                 {% endfor %}
 
                             </div>
-                            <button class="btn-add"><i class="bi bi-plus"></i></button>
+                            <button class="btn-step-add"><i class="bi bi-plus"></i></button>
                         </div>
                         <hr>
                         <input type="submit" class="btn btn-primary" value="submit"/>
                     </form>
+
                 {% endif %}
 {#            </div>#}
             {% block javascript %}
                 <script>
                     function jsonCopy_edit() {
                         let json_obj = {};
-                        let i = 1;
-                        $('.box-step').each(function () {
+                        let i = 0;
+                        $('.box-step.step-edit').each(function () {
                             json_obj[$(this).find('.form-title').val()] = $(this).find('.form-value').val();
                             i++;
                         })
-                        $('#id_edit-steps').val(JSON.stringify(json_obj));
+                        $('.edit-{{ model.id }} #id_edit-steps').val(JSON.stringify(json_obj));
                     }
-                    $(document).ready(function(){
-                        jsonCopy_edit();
-                    });
+
                 </script>
             {% endblock javascript %}
 {#{% endblock %}#}

@@ -25,8 +25,25 @@
             </div>
         </div>
     </div>
+    <div id="exercise-edit" class="modal modal-lg" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
     {% block javascript %}
         <script>
+        const editModal = new bootstrap.Modal('#exercise-edit', {
+            keyboard: false
+        })
+
             $(document).ready(function () {
                  $('#create-view').load('/exercise/create/');
             });
@@ -83,8 +100,7 @@
             $('body').on('submit', '#exercise_form_edit', function (e) {
                 e.preventDefault();
                 let var_id = $(this).attr('data-link');
-                alert(var_id);
-                jsonCopy();
+                jsonCopy_edit();
                 let form_data = new FormData(this);
                 const formDataObj = {};
                 form_data.forEach((value, key) => (formDataObj[key] = value));
@@ -101,7 +117,7 @@
                         $("#exercise_form_edit").trigger('reset');
                         alert('success');
                         appendData();
-                        myModal.hide();
+                        editModal.hide();
                     },
                     error: function (response) {
                         let error = response["responseJSON"];

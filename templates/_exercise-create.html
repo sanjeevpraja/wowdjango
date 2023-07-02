@@ -11,15 +11,21 @@
                     <input class="form-control form-value" type="text" name="" value="" placeholder="Description">
                 </div>
                 <div class="step-action">
-                    <button class="btn-delete"><i class="bi bi-trash-fill"></i></button>
+                    <button class="btn-step-delete"><i class="bi bi-trash-fill"></i></button>
                 </div>
             </div>
         </div>
-        <button class="btn-add"><i class="bi bi-plus"></i></button>
+        <button class="btn-step-add"><i class="bi bi-plus"></i></button>
     </div>
+
     <hr>
     <input class="btn btn-primary" type="submit" value="submit"/>
 </form>
 
 {% block javascript %}
+<script>
+                    $('body').on('click', "#testbtn", function(){
+                        jsonCopy();
+                    });
+                    </script>
 {% endblock javascript %}

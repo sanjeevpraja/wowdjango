@@ -52,33 +52,17 @@
     {% endif %}
 </div>
 
-<div id="exercise-detail" class="modal modal-lg" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
 
-            </div>
-        </div>
-    </div>
-</div>
 
 {% block javascript %}
     <script>
-        const myModal = new bootstrap.Modal('#exercise-detail', {
-            keyboard: false
-        })
-
         function editAction(e) {
             let pk = e.dataset.id;
             let name = e.dataset.name;
 
-            $('#exercise-detail .modal-title').html(name);
-            $('#exercise-detail .modal-body').load('/exercise/edit/' + pk)
-            myModal.show();
+            $('#exercise-edit .modal-title').html(name);
+            $('#exercise-edit .modal-body').load('/exercise/edit/' + pk)
+            editModal.show();
         }
 
         $('body').on('click', '.btn-delete', function (e) {
