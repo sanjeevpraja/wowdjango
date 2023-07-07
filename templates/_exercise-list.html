@@ -4,7 +4,11 @@
         <div class="list-grid-wrap">
             {% for item in model %}
                 <div class="list-grid">
-                    <div class="list-img"><img src="/media/{{ item.image }}" style="height: 50px; width: 50px"/></div>
+                    <div class="list-img">
+                        {% if item.image %}
+                        <img src="/media/{{ item.image }}"/>
+                        {% endif %}
+                    </div>
                     <div>
                         {{ item.id }}
                         <div class="name">{{ item.name }}</div>

@@ -96,43 +96,6 @@
                     }
                 })
             });
-
-            $('body').on('submit', '#exercise_form_edit', function (e) {
-                e.preventDefault();
-                let var_id = $(this).attr('data-link');
-                jsonCopy_edit();
-                let form_data = new FormData(this);
-                const formDataObj = {};
-                form_data.forEach((value, key) => (formDataObj[key] = value));
-                $.ajax({
-                    type: 'POST',
-                    url: var_id,
-                    data: form_data,
-                    dataType: "json",
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        alert(response + 'success');
-                        $("#exercise_form_edit").trigger('reset');
-                        alert('success');
-                        appendData();
-                        editModal.hide();
-                    },
-                    error: function (response) {
-                        let error = response["responseJSON"];
-                        alert(response.status + 'fail'); // the status code
-                        console.log(error);
-                        {#alert(response.responseJSON.error); // the message#}
-                        $.each(error, function (key, value) {
-                            alert(key + "->" + value);
-                            $("#id_edit-" + key).css({
-                                borderColor: "red",
-                            });
-                        });
-                    }
-                })
-            });
         </script>
     {% endblock javascript %}
 {% endblock %}
