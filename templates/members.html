@@ -1,39 +1,61 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Exercise</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <style>
-        .grid{
-            max-width: 1024px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;;
-        }
-    </style>
-</head>
-<body>
-<h3>hello</h3>
-    {% block content %}
-    <div class="grid">
-        <div>
-            {% if model %}
-            <table>
-            {% for item in model %}
-                <tr><td>{{item.id}}</td><td><img src="/media/{{item.image}}" style="height: 50px; width: 50px"/></td><td>{{item.name}}</td><td>{{item.duration}}</td></tr>
-            {% endfor %}
-            </table>
-        {% endif %}
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+    <div class="container">
+        {% include '_header.html' %}
+        <div class="main">
+            <div class="action-bar">
+                <a href="{% url 'members:member_create' %}" class="btn btn-primary">Create</a>
+            </div>
+            <div class="layout-1">
+                <div class="box">
+                    {% if model %}
+                         <div class="list-grid-wrap">
+                        {% for item in model %}
+                            <div class="list-grid">
+                                <div class="list-img">
+                                    {% if item.avatar %}
+                                    <img src="/media/{{ item.avatar }}"/>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    {{ item.id }}
+                                    <div class="name">{{ item.user }}</div>
+                                    <div class="detail">{{ item.exercise_join.name }}</div>
+                                </div>
+                                <div class="v-center">test</div>
+                                <div class="list-action">
+                                    <a href="/exercise/detail/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi
+                                    bi-eye"></i></a>
+                                    {#                        <a href="/exercise/edit/{{ item.id }}" class="btn btn-primary btn-circle"><i class="bi #}
+                                    {#                        bi-pencil"></i></a>#}
+                                    <a href="#" data-id="{{ item.id }}" data-name="{{ item.name }}" class="btn btn-primary
+                                    btn-circle" onclick="event.preventDefault(); editAction(this)"><i class="bi
+                                    bi-pencil"></i></a>
+                                    {#                        <a class="btn btn-danger btn-circle" href="/exercise/delete/{{ item.id }}/"><i#}
+                                    {#                                class="bi#}
+                                    {#                        bi-trash"></i></a>#}
+                                    <button class="btn btn-danger btn-circle btn-delete" data-id="{{ item.id }}"><i class="bi
+                                    bi-trash"></i></button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                        <h5>No members yet</h5>
+                {% endif %}
+                </div>
+            </div>
         </div>
-    </div>       
-    {% endblock %}
-</body>
-{% block javascript %}
+    </div>
 
-{% endblock javascript %}
-</html>
+    {% block javascript %}
+        <script>
+
+        </script>
+    {% endblock javascript %}
+{% endblock %}
+
+
+
+

@@ -139,3 +139,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'members:login'
 LOGIN_REDIRECT_URL = 'exercise:exercise'
 LOGOUT_REDIRECT_URL = 'members:login'
+
+
+#Email settings details
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.careers-portal.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'no-reply@careers-portal.com'
+EMAIL_HOST_PASSWORD = '************'

@@ -1,3 +1,6 @@
+.list-grid-wrap{
+
+}
 .list-grid{
   display: grid;
   grid-template-columns: 60px repeat(2, 1fr) auto;
@@ -5,7 +8,12 @@
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
+   &:last-child{
+       border-bottom: 0;
+     margin-bottom: 0;
+     }
    & > div{
+
    }
   .v-center{
     display: flex;

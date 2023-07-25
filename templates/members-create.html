@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+    <div class="container">
+        {% include '_header.html' %}
+
+        <div class="main">
+            <div class="layout-1">
+                <div class="box">
+             <form method="post" enctype="multipart/form-data" id="exercise_form_create">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                    <label class="label-class">{{ field.label }}</label>
+                    {{ field }}
+                    </div>
+                {% endfor %}
+             </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block javascript %}
+        <script>
+
+        </script>
+    {% endblock javascript %}
+{% endblock %}
+
+
+
+
